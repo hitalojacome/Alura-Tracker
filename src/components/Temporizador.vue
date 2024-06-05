@@ -1,13 +1,13 @@
 <template>
     <div class="is-flex is-align-items-center is-justify-content-space-between">
         <Cronometro :tempo-em-segundos="tempoEmSegundos" />
-        <button class="button" @click="iniciar">
+        <button class="button" @click="iniciar" :disabled="cronometroRodando">
             <span class="icon">
                 <i class="fas fa-play"></i>
             </span>
             <span>play</span>
         </button>
-        <button class="button" @click="finalizar">
+        <button class="button" @click="finalizar" :disabled="!cronometroRodando">
             <span class="icon">
                 <i class="fas fa-stop"></i>
             </span>
@@ -26,12 +26,14 @@ export default defineComponent({
     data() {
         return {
             tempoEmSegundos: 0,
-            cronometro: 0
+            cronometro: 0,
+            cronometroRodando: false
         }
     },    
     methods: {
         // Inicia a contagem da tarefa
         iniciar() {
+            this.cronometroRodando = true
             this.cronometro = setInterval(() => {
                 // Atribui um em cada segundo
                 this.tempoEmSegundos += 1
@@ -39,6 +41,7 @@ export default defineComponent({
         },
         // Finaliza a contagem da tarefa
         finalizar() {
+            this.cronometroRodando = false
             clearInterval(this.cronometro)
         }
     }
