@@ -1,7 +1,6 @@
 <template>
-    <div class="box has-text-weight-bold">
-        <!-- O que tiver dentro do componente será exibido aqui! -->
-        <slot></slot>
+    <div class="box has-text-weight-bold">        
+        <slot><!-- O que tiver dentro do componente será exibido aqui! --></slot>
     </div>
 </template>
 
@@ -16,6 +15,7 @@ export default defineComponent ({
 
 <style scoped>
 .box {
+    color: black;
     background: #FAF0CA;
 }
 </style>

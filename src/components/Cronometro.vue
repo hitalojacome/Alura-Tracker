@@ -25,3 +25,9 @@ export default defineComponent(
     },
 });
 </script>
+
+<style scoped>
+strong {
+    color: rgb(87, 85, 85);
+}
+</style>

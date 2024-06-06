@@ -11,7 +11,7 @@
         <div>
           <!-- Para cada tarefa na lista de tarefas, atribui a tarefa para props tarefa -->
           <Tarefa v-for="(tarefa, index) in tarefas" :key="index" :tarefa="tarefa" />
-          <Box>
+          <Box v-if="listaEstaVazia">
             Você não está muito produtivo hoje :(
           </Box>
         </div>
@@ -35,13 +35,19 @@ export default defineComponent({
   // Nome do componente
   name: 'App',
   // Componentes utilizados
-  components: { 
-    BarraLateral, 
-    Formulario, 
+  components: {
+    BarraLateral,
+    Formulario,
     Tarefa,
     Box
   },
-  data () {
+  // Propriedade computada
+  computed: {
+    listaEstaVazia(): boolean {
+      return this.tarefas.length === 0
+    }
+  },
+  data() {
     return {
       // Define uma lista de objetos ITarefa
       tarefas: [] as ITarefa[]
