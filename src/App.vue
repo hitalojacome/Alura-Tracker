@@ -1,11 +1,11 @@
 <!-- HTML estilizado com bulma -->
 <template>
-  <main class="columns is-gapless is-multiline">
+  <main class="columns is-gapless is-multiline" :class="{ 'modo-escuro': modoEscuroAtivo }">
     <div class="column is-one-quarter">
-      <BarraLateral />
+      <BarraLateral @aoTemaAlterado="trocarTema" />
     </div>
 
-    <div class="column is-three-quarter">
+    <div class="column is-three-quarter conteudo">
       <Formulario @aoSalvarTarefa="salvarTarefa" />
       <div class="lista">
         <div>
@@ -50,13 +50,17 @@ export default defineComponent({
   data() {
     return {
       // Define uma lista de objetos ITarefa
-      tarefas: [] as ITarefa[]
+      tarefas: [] as ITarefa[],
+      modoEscuroAtivo: false
     }
   },
   methods: {
     // Recebe uma tarefa passada pelo Formulario e adiciona a lista
     salvarTarefa(tarefa: ITarefa) {
       this.tarefas.push(tarefa)
+    },
+    trocarTema(modoEscuroAtivo: boolean) {
+      this.modoEscuroAtivo = modoEscuroAtivo
     }
   }
 });
@@ -65,5 +69,19 @@ export default defineComponent({
 <style scoped>
 .lista {
   padding: 1.25rem;
+}
+
+main {
+  --bg-primario: #fff;
+  --texto-primario: #000;
+}
+
+main.modo-escuro {
+  --bg-primario: #2b2d42;
+  --texto-primario: #ddd;
+}
+
+.conteudo {
+  background-color: var(--bg-primario);
 }
 </style>

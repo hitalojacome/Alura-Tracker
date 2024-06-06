@@ -1,5 +1,5 @@
 <template>
-    <div class="is-flex is-align-items-center is-justify-content-space-between">
+    <div class="is-flex is-align-items-center is-justify-content-space-around">
         <!--Chama o componente 'Cronometro' passando o tempo em segundos para a propriedade tempoEmSegundos-->
         <Cronometro :tempoEmSegundos="tempoEmSegundos" />
 
