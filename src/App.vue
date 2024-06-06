@@ -11,6 +11,9 @@
         <div>
           <!-- Para cada tarefa na lista de tarefas, atribui a tarefa para props tarefa -->
           <Tarefa v-for="(tarefa, index) in tarefas" :key="index" :tarefa="tarefa" />
+          <Box>
+            Você não está muito produtivo hoje :(
+          </Box>
         </div>
       </div>
     </div>
@@ -25,6 +28,7 @@ import { defineComponent } from 'vue';
 import BarraLateral from './components/BarraLateral.vue'
 import Formulario from './components/Formulario.vue'
 import Tarefa from './components/Tarefa.vue'
+import Box from './components/Box.vue'
 import ITarefa from './interfaces/ITarefa';
 
 export default defineComponent({
@@ -34,7 +38,8 @@ export default defineComponent({
   components: { 
     BarraLateral, 
     Formulario, 
-    Tarefa 
+    Tarefa,
+    Box
   },
   data () {
     return {
