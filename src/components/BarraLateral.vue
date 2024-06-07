@@ -15,12 +15,12 @@ export default defineComponent({
   emits: ['aoTemaAlterado'],
   data() {
     return {
-      modoEscuroAtivo: false
+      modoEscuro: false
     }
   },
   computed: {
     textoBotao() {
-      if (this.modoEscuroAtivo) {
+      if (this.modoEscuro) {
         return 'Modo Claro'
       }
       return 'Modo Escuro'
@@ -28,8 +28,8 @@ export default defineComponent({
   },
   methods: {
     alterarTema() {
-      this.modoEscuroAtivo = !this.modoEscuroAtivo
-      this.$emit('aoTemaAlterado', this.modoEscuroAtivo)
+      this.modoEscuro = !this.modoEscuro
+      this.$emit('aoTemaAlterado', this.modoEscuro)
     }
   }
 });
