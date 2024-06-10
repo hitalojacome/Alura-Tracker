@@ -2,7 +2,7 @@
 <template>
   <main class="columns is-gapless is-multiline" :class="{ 'modo-escuro': modoEscuro }">
     <div class="column is-one-quarter">
-      <BarraLateral @aoTemaAlterado="alterarModo" />
+      <BarraLateral @aoAlterarModo="alterarModo" />
     </div>
     <div class="column is-three-quarter conteudo">
       <router-view></router-view>
@@ -33,10 +33,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.lista {
-  padding: 1.25rem;
-}
-
 main {
   --bg-primario: #fff;
   --texto-primario: #000;
@@ -45,6 +41,10 @@ main {
 main.modo-escuro {
   --bg-primario: #2b2d42;
   --texto-primario: #ddd;
+}
+
+.lista {
+  padding: 1.25rem;
 }
 
 .conteudo {

@@ -15,13 +15,26 @@
 import { defineComponent, PropType } from 'vue'
 import Cronometro from './Cronometro.vue'
 import Box from './Box.vue'
-import ITarefa from '@/interfaces/ITarefa';
+import ITarefa from '@/interfaces/ITarefa'
 
 export default defineComponent({
     name: 'TarefaX',
-    components: { Cronometro, Box },
+    components: { 
+        Cronometro, 
+        Box 
+    },
     props: {
-        tarefa: { type: Object as PropType<ITarefa>, required: true }
+        tarefa: { 
+            type: Object as PropType<ITarefa>, 
+            required: true 
+        }
+    },
+    computed: {
+        tempoGasto(): string {
+            return new Date(this.tarefa.duracaoEmSegundos * 1000)
+                .toISOString()
+                .substr(11, 8)
+        }
     }
 })
 </script>

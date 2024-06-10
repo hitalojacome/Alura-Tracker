@@ -1,16 +1,16 @@
 <template>
-    <div class="box formulario">
+    <div class="box">
         <div class="columns">
-            <div class="column is-8" role="form" aria-label="Formulário para criação de uma nova tarefa">
+            <div class="column is-7" role="form" aria-label="Formulário para iniciar uma nova tarefa">
                 <input 
+                    class="input"
                     type="text" 
-                    class="input" 
                     placeholder="Qual tarefa você deseja iniciar?"
                     v-model="descricao"
                 />
             </div>
             <div class="column">
-                <Temporizador @ao-temporizador-finalizado="finalizarTarefa" />
+                <Temporizador @aoFinalizarTarefa="salvarTarefa" />
             </div>
         </div>
     </div>
@@ -22,24 +22,19 @@ import Temporizador from './Temporizador.vue';
 
 export default defineComponent({
     name: 'FormularioX',
-
-    // Eventos
     emits: ['aoSalvarTarefa'],
-
     components: { Temporizador },
-    
     data () {
         return {
             descricao: ''
         }
     },
-
     methods: {
         // O método recebe o tempo decorrido
-        finalizarTarefa(tempoDecorrido: number) : void {
+        salvarTarefa(tempoEmSegundos: number) : void {
             // Ao finalizar a tarefa, é executado o evento e enviado os dados de uma tarefa
             this.$emit('aoSalvarTarefa', {
-                duracaoEmSegundos: tempoDecorrido,
+                duracaoEmSegundos: tempoEmSegundos,
                 descricao: this.descricao
             })
             this.descricao = ''
@@ -48,9 +43,13 @@ export default defineComponent({
 });
 </script>
 
-<style>
-.formulario {
-    background-color: var(--bg-primario);
-    color: var(--texto-primario);
+<style scoped>
+.button {
+  margin-left: 8px;
+}
+
+.box {
+  background-color: var(--bg-primario);
+  color: var(--texto-primario);
 }
 </style>

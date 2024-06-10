@@ -1,23 +1,22 @@
 <template>
     <Formulario @aoSalvarTarefa="salvarTarefa" />
     <div class="lista">
-        <Tarefa v-for="(tarefa, index) in tarefas" :key="index" :tarefa="tarefa" />
         <Box v-if="semTarefas">
             Você não está muito produtivo hoje <span class="has-text-weight-bold">:(</span>
         </Box>
+        <Tarefa v-for="(tarefa, index) in tarefas" :tarefa="tarefa" :key="index" />
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-
-import Formulario from '../components/Formulario.vue'
-import Tarefa from '../components/Tarefa.vue'
-import Box from '../components/Box.vue'
-import ITarefa from '../interfaces/ITarefa';
+import { defineComponent } from "vue";
+import Formulario from "../components/Formulario.vue";
+import Tarefa from "../components/Tarefa.vue";
+import Box from "../components/Box.vue";
+import ITarefa from "../interfaces/ITarefa"
 
 export default defineComponent({
-    name: 'App',
+    name: "App",
     components: {
         Formulario,
         Tarefa,
@@ -25,11 +24,11 @@ export default defineComponent({
     },
     data() {
         return {
-            tarefas: [] as ITarefa[],
+            tarefas: [] as ITarefa[]
         }
     },
     methods: {
-        salvarTarefa(tarefa: ITarefa) {
+        salvarTarefa(tarefa: ITarefa): void {
             this.tarefas.push(tarefa)
         }
     },
@@ -40,3 +39,9 @@ export default defineComponent({
     }
 });
 </script>
+
+<style scoped>
+.lista {
+    padding: 0em 2em;
+}
+</style>

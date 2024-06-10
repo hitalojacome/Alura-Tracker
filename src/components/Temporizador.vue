@@ -1,5 +1,5 @@
 <template>
-    <div class="is-flex is-align-items-center is-justify-content-space-around">
+    <section class="is-flex is-align-items-center is-justify-content-space-around">
         <!--Chama o componente 'Cronometro' passando o tempo em segundos para a propriedade tempoEmSegundos-->
         <Cronometro :tempoEmSegundos="tempoEmSegundos" />
 
@@ -20,7 +20,7 @@
             </span>
             <span>stop</span>
         </button>
-    </div>
+    </section>
 </template>
 
 <script lang="ts">
@@ -32,7 +32,7 @@ export default defineComponent({
     name: 'TemporizadorX',
 
     // Emissões de eventos
-    emits: ['aoTemporizadorFinalizado'],
+    emits: ['aoFinalizarTarefa'],
 
     // Componentes utilizados
     components: { Cronometro },
@@ -40,13 +40,13 @@ export default defineComponent({
         return {
             // Estados
             tempoEmSegundos: 0,
-            cronometro: 0,
-            cronometroRodando: false
+            cronometroRodando: false,
+            cronometro: 0
         }
     },
     methods: {
         // Inicia a contagem da tarefa
-        iniciar() {
+        iniciar() : void {
             // Altera o valor do estado
             this.cronometroRodando = true
             this.cronometro = setInterval(() => {
@@ -56,15 +56,17 @@ export default defineComponent({
         },
         // Finaliza a contagem da tarefa
         finalizar() {
-            this.cronometroRodando = false
-            // Interrompe o intervalo
-            clearInterval(this.cronometro)
-
-            // Emite o evento passando o tempo em segundos
-            this.$emit('aoTemporizadorFinalizado', this.tempoEmSegundos)
-            // Zera o tempo em segundos do cronometro
+            this.$emit('aoFinalizarTarefa', this.tempoEmSegundos)
             this.tempoEmSegundos = 0
+            this.cronometroRodando = false
+            clearInterval(this.cronometro)
         }
     }
 });
 </script>
+
+<style scoped>
+.button {
+  margin-left: 8px;
+}
+</style>
