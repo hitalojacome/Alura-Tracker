@@ -25,8 +25,6 @@
 import { computed, defineComponent } from 'vue'
 import { useStore } from '@/store';
 import Temporizador from './Temporizador.vue';
-import { NOTIFICAR } from '@/store/tipo-mutacoes';
-import { TipoNotificacao } from '@/interfaces/INotificacao';
 
 export default defineComponent({
     name: 'FormularioX',
@@ -41,25 +39,10 @@ export default defineComponent({
     methods: {
         // O método recebe o tempo decorrido
         salvarTarefa(tempoEmSegundos: number): void {
-            const projeto = this.projetos.find((p) => p.id == this.idProjeto)
-            if(!projeto) {
-                this.store.commit(NOTIFICAR, {
-                    titulo: 'Ops!',
-                    texto: 'Selecione um projeto antes de finalizar a tarefa!',
-                    tipo: TipoNotificacao.FALHA,
-                })
-                return
-            }
-            this.store.commit(NOTIFICAR, {
-                titulo: 'Tarefa finalizada com sucesso!',
-                texto: 'Sua tarefa foi concluida',
-                tipo: TipoNotificacao.SUCESSO
-            })
-
             this.$emit('aoSalvarTarefa', {
                 duracaoEmSegundos: tempoEmSegundos,
                 descricao: this.descricao,
-                projeto: projeto
+                projeto: this.projetos.find((p) => p.id == this.idProjeto)
             })
             this.descricao = ''
         }
