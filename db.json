@@ -2,7 +2,7 @@
   "projetos": [
     {
       "id": "1",
-      "nome": "Alura Tracker 3.0"
+      "nome": "Alura Tracker"
     },
     {
       "nome": "ByteBank",
@@ -35,6 +35,20 @@
       "projeto": {
         "id": "7afa",
         "nome": "Estudos pessoais"
+      }
+    },
+    {
+      "id": "408b",
+      "duracaoEmSegundos": 3,
+      "descricao": "Teste"
+    },
+    {
+      "id": "a0dc",
+      "duracaoEmSegundos": 2,
+      "descricao": "tESTE",
+      "projeto": {
+        "id": "1",
+        "nome": "Alura Tracker"
       }
     }
   ]
