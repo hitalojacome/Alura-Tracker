@@ -13,27 +13,24 @@
       </p>
     </div>
     <Tarefa v-for="(tarefa, index) in tarefas" :tarefa="tarefa" :key="index" @aoTarefaClicada="selecionarTarefa" />
-    <div class="modal" :class="{ 'is-active': tarefaSelecionada }" v-if="tarefaSelecionada">
-      <div class="modal-background"></div>
-      <div class="modal-card">
-        <header class="modal-card-head">
+    <Modal :mostrar="tarefaSelecionada != null">
+        <template v-slot:cabecalho>
           <p class="modal-card-title">Editando tarefa</p>
           <button @click="fecharModal" class="delete" aria-label="close"></button>
-        </header>
-        <section class="modal-card-body">
+        </template>
+        <template v-slot:corpo>
           <div class="field">
             <label for="descricaoDaTarefa" class="label">Descrição</label>
-            <input type="text" class="input" v-model="tarefaSelecionada.descricao" />
+            <input type="text" class="input" v-model="tarefaSelecionada.descricao" id="descricaoDaTarefa" />
           </div>
-        </section>
-        <footer class="modal-card-foot">
+        </template>
+        <template v-slot:rodape>
           <div class="buttons">
             <button @click="alterarTarefa" class="button is-success">Salvar alterações</button>
             <button @click="fecharModal" class="button">Cancelar</button>
           </div>
-        </footer>
-      </div>
-    </div>
+        </template>
+    </Modal>
   </div>
 </template>
 
@@ -42,6 +39,7 @@ import { computed, defineComponent, ref, watchEffect } from "vue"
 import Formulario from "../components/Formulario.vue"
 import Tarefa from "../components/Tarefa.vue"
 import Box from "../components/Box.vue"
+import Modal from "@/components/Modal.vue"
 import { useStore } from "@/store"
 import {
   ALTERAR_TAREFA,
@@ -55,7 +53,8 @@ export default defineComponent({
   components: {
     Formulario,
     Tarefa,
-    Box
+    Box,
+    Modal
   },
   data() {
     return {
